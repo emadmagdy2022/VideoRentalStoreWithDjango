@@ -30,7 +30,7 @@ class Order (models.Model):
         CONFIRMED = 'Confirmed'
         CANCLED = 'Cancelled'
     order_id = models.UUIDField(primary_key=True, default=uuid.uuid4)
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=10,
                               choices=StatusChoices.choices,
