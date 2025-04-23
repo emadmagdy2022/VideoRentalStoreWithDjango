@@ -10,6 +10,7 @@ from django.shortcuts import get_object_or_404
 
 @api_view(['GET'])
 def product_list(request):
+    # items is the order related name in orderItem model
     products = Product.objects.all()
     serializer = ProductSerializer(products, many=True)
     return Response(serializer.data)
@@ -24,7 +25,8 @@ def product_detail(request, pk):
 
 @api_view(['GET'])
 def order_list(request):
-    orders = Order.objects.all()
+    orders = Order.objects.prefetch_related('items__product'
+                                            ).all()
     serializer = OrderSerializer(orders, many=True)
     return Response(serializer.data)
 
