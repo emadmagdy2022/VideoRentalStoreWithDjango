@@ -11,15 +11,9 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.views import APIView
 
 
-class ProductListAPIView(generics.ListAPIView):
+class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
     # queryset = Product.objects.filter(stock__gt=0)
-    # queryset = Product.objects.exclude(stock__gt=0)
-    serializer_class = ProductSerializer
-
-
-class ProductCreateAPIView(generics.CreateAPIView):
-    model = Product
     # queryset = Product.objects.exclude(stock__gt=0)
     serializer_class = ProductSerializer
 
