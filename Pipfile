@@ -15,6 +15,7 @@ tzdata = "==2024.2"
 pillow = "*"
 django-extensions = "*"
 django-silk = "*"
+djangorestframework-simplejwt = {extras = ["crypto"], version = "*"}
 
 [dev-packages]
 
