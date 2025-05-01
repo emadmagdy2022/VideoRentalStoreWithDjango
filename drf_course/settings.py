@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'api',
     'django_extensions',
     'silk',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -131,5 +132,13 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
         # leaving session authentication for continue using the admin panel
         'rest_framework.authentication.SessionAuthentication',
-    ]
+    ],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'E-Cinnerce API',
+    'DESCRIPTION': 'Your project description',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
 }

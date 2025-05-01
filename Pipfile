@@ -16,6 +16,8 @@ pillow = "*"
 django-extensions = "*"
 django-silk = "*"
 djangorestframework-simplejwt = {extras = ["crypto"], version = "*"}
+drf-spectacular = "*"
+jsonschema = "*"
 
 [dev-packages]
 
