@@ -10,13 +10,13 @@ from rest_framework import generics
 from rest_framework.permissions import (IsAuthenticated,
                                         IsAdminUser, AllowAny)
 from rest_framework.views import APIView
+from api.filters import ProductFilter
 
 
 class ProductListCreateAPIView(generics.ListCreateAPIView):
     queryset = Product.objects.all()
-    # queryset = Product.objects.filter(stock__gt=0)
-    # queryset = Product.objects.exclude(stock__gt=0)
     serializer_class = ProductSerializer
+    filterset_class = ProductFilter
 
     def get_permissions(self):
         self.permission_classes = [AllowAny]
@@ -27,7 +27,6 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
 
 class ProductDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Product.objects.all()
-    serializer_class = ProductSerializer
 
     def get_permissions(self):
         self.permission_classes = [AllowAny]
