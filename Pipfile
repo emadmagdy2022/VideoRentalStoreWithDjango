@@ -18,6 +18,7 @@ djangorestframework-simplejwt = {extras = ["crypto"], version = "*"}
 drf-spectacular = "*"
 jsonschema = "*"
 django-filter = "*"
+isort = "*"
 
 [dev-packages]
 
