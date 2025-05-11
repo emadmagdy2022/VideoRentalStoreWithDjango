@@ -26,7 +26,7 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
                        filters.SearchFilter,
                        filters.OrderingFilter,
                        InStockFilter]
-    search_fields = ['name', 'description']
+    search_fields = ['=name', 'description']
     ordering_fields = ['name', 'price', 'stock']
     # make the default page size is in settings.py
     # pagination_class = LimitOffsetPagination
@@ -60,8 +60,15 @@ class OrderViewSet(viewsets.ModelViewSet):
     filterset_class = OrderFilter
     filter_backends = [DjangoFilterBackend]
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        if not self.request.user.is_staff:
+            qs = qs.filter(user=self.request.user)
+        return qs
+
     @action(detail=False,
-            method=['get'], url_path='user-orders',
+            methods=['get'],
+            url_path='user-orders'
             )
     def user_orders(self, request):
         orders = self.get_queryset().filter(user=request.user)
