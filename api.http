@@ -38,7 +38,7 @@ POST http://localhost:8000/api/token/ HTTP/1.1
 Content-Type: application/json
 
 {
-    "username": "admin",
+    "username": "emad",
     "password": "test"
 }
 
@@ -55,3 +55,8 @@ Content-Type: application/json
 {
     "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTc0NjE3Njg0MCwiaWF0IjoxNzQ2MDkwNDQwLCJqdGkiOiJkNDA5YjVmMjllY2I0ZGYyOTVjMWY3Nzg5ZDFkYzdlMyIsInVzZXJfaWQiOjF9.sbbaM08JEUF8vZZJ654WoBhJzYyLXmW91OW4nb_EqE8"
 }
+
+###
+
+GET http://localhost:8000/orders/ HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQ3MjUxNjAwLCJpYXQiOjE3NDcyNTEzMDAsImp0aSI6IjdjMjhlMzAzZmQ5NDRkNWQ4NGM2YTk2M2Q2ZTc3YmVjIiwidXNlcl9pZCI6M30.bjGK1Vg_HbApg0XTSRS-EATiQ00caY7RDQ1UY55_Q6w
