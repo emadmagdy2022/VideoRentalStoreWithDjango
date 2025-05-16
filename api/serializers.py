@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import User, Order, Product, OrderItem
+from django.db import transaction
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -65,21 +66,29 @@ class OrderCreateSerializer(serializers.ModelSerializer):
                 'product',
                 'quantity',
             )
-    order_id = serializers.UUIDField(read_only=True)
+    order_id = serializers.UUIDField(read_only=True, required=False)
     items = OrderItemCreateSerializer(many=True)
 
     def create(self, validated_data):
         orderitem_data = validated_data.pop('items')
-        order = Order.objects.create(**validated_data)
 
-        for item in orderitem_data:
-            OrderItem.objects.create(
-                order=order,
-                **item
-            )
-        return order
+        with transaction.atomic():
+            order = Order.objects.create(**validated_data)
+            for item in orderitem_data:
+                OrderItem.objects.create(order=order, **item)
 
-    class Metal:
+    def update(self, instance, validated_data):
+        orderitem_data = validated_data.pop('items')
+        with transaction.atomic():
+            instance = super().update(instance, validated_data)
+
+            if orderitem_data is not None:
+                instance.items.all().delete()
+                for item in orderitem_data:
+                    OrderItem.objects.create(order=instance, **item)
+        return instance
+
+    class Meta:
         model = Order
         fields = (
             'order_id',
