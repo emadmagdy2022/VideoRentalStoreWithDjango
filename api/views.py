@@ -16,6 +16,8 @@ from api.models import Order, OrderItem, Product, User
 from api.serializers import (OrderSerializer, ProductInfoSerializer,
                              ProductSerializer, OrderCreateSerializer, UserSerializer)
 from rest_framework.decorators import action
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
 
 class ProductListCreateAPIView(generics.ListCreateAPIView):
@@ -34,6 +36,15 @@ class ProductListCreateAPIView(generics.ListCreateAPIView):
     pagination_class.page_size_query_param = 'size'
     pagination_class.page_size = 5
     pagination_class.max_page_size = 100
+
+    @method_decorator(cache_page(60 * 15, key_prefix='product_list'))
+    def list(self, request, *args, **kwargs):
+        return super().list(request, *args, **kwargs)
+
+    def get_queryset(self):
+        import time
+        time.sleep(2)
+        return super().get_queryset()
 
     def get_permissions(self):
         self.permission_classes = [AllowAny]

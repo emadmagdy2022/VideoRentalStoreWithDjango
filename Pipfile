@@ -19,6 +19,8 @@ drf-spectacular = "*"
 jsonschema = "*"
 django-filter = "*"
 isort = "*"
+redis = {extras = ["hiredis"], version = "*"}
+django-redis = "*"
 
 [dev-packages]
 
