@@ -3,6 +3,12 @@ from .models import User, Order, Product, OrderItem
 from django.db import transaction
 
 
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = "__all__"
+
+
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product

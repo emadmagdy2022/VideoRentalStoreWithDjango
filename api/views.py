@@ -12,9 +12,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from api.filters import InStockFilter, OrderFilter, ProductFilter
-from api.models import Order, OrderItem, Product
+from api.models import Order, OrderItem, Product, User
 from api.serializers import (OrderSerializer, ProductInfoSerializer,
-                             ProductSerializer, OrderCreateSerializer)
+                             ProductSerializer, OrderCreateSerializer, UserSerializer)
 from rest_framework.decorators import action
 
 
@@ -99,3 +99,9 @@ class ProductInfoAPIView(APIView):
              'max_price': products.aggregate(max_price=Max('price'))['max_price']
              })
         return Response(serializer.data)
+
+
+class UserListView (generics.ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    pagination_class = None
