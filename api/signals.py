@@ -2,6 +2,7 @@ from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from api.models import Product
 from django.core.cache import cache
+from django.views.decorators.vary import vary_on_headers
 
 
 @receiver(post_save, sender=Product)
