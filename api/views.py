@@ -19,10 +19,12 @@ from rest_framework.decorators import action
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.decorators.vary import vary_on_headers
+from rest_framework.throttling import ScopedRateThrottle
 
 
 class ProductListCreateAPIView(generics.ListCreateAPIView):
     throttle_scope = 'products'
+    throttle_classes = [ScopedRateThrottle]
     queryset = Product.objects.order_by('pk')
     serializer_class = ProductSerializer
     filterset_class = ProductFilter
