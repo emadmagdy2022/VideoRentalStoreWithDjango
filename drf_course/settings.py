@@ -141,13 +141,14 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 2,
     'DEFAULT_THROTTLE_CLASSES': [
         'rest_framework.throttling.AnonRateThrottle',
-        'api.throttles.BurstRateThrottle',
-        'api.throttles.SustainedRateThrottle',
+        'rest_framework.throttling.ScopedRateThrottle',
+
     ],
     'DEFAULT_THROTTLE_RATES': {
         'anon': '2/minute',
-        'burst': '10/minute',
-        'sustained': '15/hour'
+        'products': '5/minute',
+        'orders': '10/minute',
+
     }
 }
 SPECTACULAR_SETTINGS = {
