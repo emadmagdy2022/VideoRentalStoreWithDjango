@@ -21,6 +21,8 @@ django-filter = "*"
 isort = "*"
 redis = {extras = ["hiredis"], version = "*"}
 django-redis = "*"
+celery = "*"
+eventlet = "*"
 
 [dev-packages]
 

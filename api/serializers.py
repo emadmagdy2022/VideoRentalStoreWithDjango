@@ -6,7 +6,12 @@ from django.db import transaction
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = "__all__"
+        fields = (
+
+            'username',
+            'email',
+            'is_staff'
+        )
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -82,6 +87,7 @@ class OrderCreateSerializer(serializers.ModelSerializer):
             order = Order.objects.create(**validated_data)
             for item in orderitem_data:
                 OrderItem.objects.create(order=order, **item)
+        return order
 
     def update(self, instance, validated_data):
         orderitem_data = validated_data.pop('items')
